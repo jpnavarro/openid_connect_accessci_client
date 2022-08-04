@@ -1,0 +1,21 @@
+{
+    "name": "accessci/openid_connect_accessci_client",
+    "description": "OpenID Connect ACCESS CI Client",
+    "type": "drupal-custom-module",
+    "require": {
+        "drupal/openid_connect": "^1.2"
+    },
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Accessci\\OpenidConnectAccessciClient\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "JP Navarro",
+            "email": "navarro@anl.gov"
+        }
+    ],
+    "minimum-stability": "dev"
+}
