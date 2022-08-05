@@ -1,6 +1,6 @@
 <?php
 
-namespace ACCESSci\openid_connect\Plugin\OpenIDConnectClient;
+namespace Drupal\openid_connect_accessci_client\Plugin\OpenIDConnectClient;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\openid_connect\Plugin\OpenIDConnectClientBase;
