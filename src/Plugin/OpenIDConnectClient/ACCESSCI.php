@@ -13,7 +13,7 @@ use Drupal\openid_connect\Plugin\OpenIDConnectClientBase;
  *   label = @Translation("ACCESS CI")
  * )
  */
-class OpenIDConnectAccessciClient extends OpenIDConnectClientBase {
+class ACCESSCI extends OpenIDConnectClientBase {
 
   /**
    * {@inheritdoc}
