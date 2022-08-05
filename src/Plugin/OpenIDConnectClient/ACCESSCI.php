@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\example\Plugin\OpenIDConnectClient;
+namespace ACCESSci\openid_connect\Plugin\OpenIDConnectClient;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\openid_connect\Plugin\OpenIDConnectClientBase;
 
 /**
- * Access CI OpenID Connect client.
+ * ACCESS CI OpenID Connect client.
  *
  * @OpenIDConnectClient(
  *   id = "accessci",
