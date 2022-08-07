@@ -21,6 +21,11 @@ class ACCESSCI extends OpenIDConnectClientBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
+    $form['requested_scopes'] = [
+       '#title' => $this->t('Requested scopes'),
+       '#type' => 'textfield',
+       '#default_value' => $this->configuration['requested_scopes'],
+    ];
     $form['authorization_endpoint'] = [
        '#title' => $this->t('Authorization endpoint'),
        '#type' => 'textfield',
@@ -49,6 +54,15 @@ class ACCESSCI extends OpenIDConnectClientBase {
       'token' => 'https://cilogon.org/oauth2/token',
       'userinfo' => 'https://cilogon.org/oauth2/userinfo',
     );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getClientScopes() {
+    $scopes_string = $this->configuration['requested_scopes'];
+    $scopes_array = explode(',' $scopes_string);
+    return $scopes_array;
   }
 
 }

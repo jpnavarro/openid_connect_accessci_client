@@ -2,6 +2,7 @@ enabled: false
 settings:
   client_id:
   client_secret:
+  requested_scopes: 'email,openid,profile,org.cilogon.userinfo'
   authorization_endpoint: 'https://cilogon.org/authorize'
   token_endpoint: 'https://cilogon.org/oauth2/token'
   userinfo_endpoint: 'https://cilogon.org/oauth2/userinfo'
