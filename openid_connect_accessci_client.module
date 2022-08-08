@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\user\UserInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Url;
 
 function openid_connect_accessci_client_openid_connect_userinfo_save(UserInterface $account, array $context) {
     if  ( $context['plugin_id'] != 'accessci'
