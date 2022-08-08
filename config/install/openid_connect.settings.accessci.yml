@@ -6,4 +6,4 @@ settings:
   token_endpoint: 'https://cilogon.org/oauth2/token'
   userinfo_endpoint: 'https://cilogon.org/oauth2/userinfo'
   requested_scopes: 'email,openid,profile,org.cilogon.userinfo'
-  login_redirect:
+  login_redirection:
