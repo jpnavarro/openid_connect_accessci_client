@@ -21,11 +21,6 @@ class ACCESSCI extends OpenIDConnectClientBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
-    $form['requested_scopes'] = [
-       '#title' => $this->t('Requested scopes'),
-       '#type' => 'textfield',
-       '#default_value' => $this->configuration['requested_scopes'],
-    ];
     $form['authorization_endpoint'] = [
        '#title' => $this->t('Authorization endpoint'),
        '#type' => 'textfield',
@@ -41,6 +36,17 @@ class ACCESSCI extends OpenIDConnectClientBase {
        '#type' => 'textfield',
        '#default_value' => $this->configuration['userinfo_endpoint'],
     ];
+    $form['requested_scopes'] = [
+       '#title' => $this->t('Requested scopes'),
+       '#type' => 'textfield',
+       '#default_value' => $this->configuration['requested_scopes'],
+    ];
+    $form['login_redirect'] = [
+       '#title' => $this->t('Login redirect page'),
+       '#type' => 'textfield',
+       '#default_value' => $this->configuration['login_redirect'],
+    ];
+
 
     return $form;
   }

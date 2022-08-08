@@ -3,101 +3,34 @@
 use Drupal\user\UserInterface;
 
 function openid_connect_accessci_client_openid_connect_userinfo_save(UserInterface $account, array $context) {
-  ddm('HELLO ACCESSCI');
-  ddm($account);
-  ddm($context);
-  return TRUE;
-}
-
-//      if (
-//        $context['plugin_id'] != 'generic'
-//        || empty($context['userinfo']['my_info'])
-//      ) {
-//        return;
-//      }
-
-// Note: For brevity, this example does not validate field
-// types, nor does it implement error handling.
-//      $my_info = $context['userinfo']['my_info'];
-//      foreach ($my_info as $key => $value) {
-//        $account->set('field_' . $key, $value);
-//      }
-/**
- * OpenID Connect post authorize hook.
- *
- * This hook runs after a user has been authorized and claims have been mapped
- * to the user's account.
- *
- * A popular use case for this hook is to saving token and additional identity
- * provider related information to the user's Drupal session (private temp
- * store).
- *
- * @param \Drupal\user\UserInterface $account
- *   User account object of the authorized user.
- * @param array $context
- *   An associative array with context information:
- *   - tokens:         An array of tokens.
- *   - user_data:      An array of user and session data.
- *   - userinfo:       An array of user information.
- *   - plugin_id:      The plugin identifier.
- *   - sub:            The remote user identifier.
- *
- * @ingroup openid_connect_api
- */
-/**
-  public function ACCESSCI_openid_connect_post_authorize(UserInterface $account, array $context) {
-    if (count($matching_users) === 1) {
-      $user = reset($matching_users);
-      // Connect the user account.
-      openid_connect_connect_account($user, $name, $sub);
-      return $user;
-    }
-    elseif (count($matching_users) === 0) {
-      return TRUE;
-    }
-    return FALSE;
-  }
- */
-
-/**
- * Save userinfo hook.
- *
- * This hook runs after the claim mappings have been applied by the OpenID
- * Connect module, but before the account will be saved.
- *
- * A popular use case for this hook is mapping additional information like
- * user roles or other complex claims provided by the identity provider, that
- * the OpenID Connect module has no mapping mechanisms for.
- *
- * @param \Drupal\user\UserInterface $account
- *   A user account object.
- * @param array $context
- *   An associative array with context information:
- *   - tokens:         Array of original tokens.
- *   - user_data:      Array of user and session data from the ID token.
- *   - userinfo:       Array of user information from the userinfo endpoint.
- *   - plugin_id:      The plugin identifier.
- *   - sub:            The remote user identifier.
- *   - is_new:         Whether the account was created during authorization.
- *
- * @ingroup openid_connect_api
- */
-/**
-  public function ACCESSCI_openid_connect_userinfo_save(UserInterface $account, array $context) {
-  // Update only when the required information is available.
-      if (
-        $context['plugin_id'] != 'generic'
-        || empty($context['userinfo']['my_info'])
-      ) {
+    if  ( $context['plugin_id'] != 'accessci'
+        || empty($context['userinfo']['sub'])) {
         return;
-      }
+    }
+    $account->set('name', $context['userinfo']['sub']);
 
-      // Note: For brevity, this example does not validate field
-      // types, nor does it implement error handling.
-      $my_info = $context['userinfo']['my_info'];
-      foreach ($my_info as $key => $value) {
-        $account->set('field_' . $key, $value);
-      }
-  }
+    $redirect_to = \Drupal::config('openid_connect.settings.accessci')->get('login_redirect');
+    if ( !empty($redirect_to) ) {
+        $redirect = new RedirectResponse(Url::fromUserInput($redirect_to)->toString());
+        $redirect->send();
+    }
+
+    return TRUE;
+    /**
+    $idp = $context['userinfo']['idp_name'];
+    $sub = $context['userinfo']['sub'];
+    ddm('HELLO ACCESSCI');
+    ddm($account);
+    ddm($context);
+    */
 }
-*/
+
+function openid_connect_accessci_client_openid_connect_pre_authorize($account, array $context) {
+    if ( empty($context['userinfo']['idp_name'])
+        || $context['userinfo']['idp_name'] != 'ACCESS' ) {
+            Drupal::messenger()->addError(t('Login using your ACCESS CI identity is required on this website'));
+            return FALSE;
+    }
+
+   return TRUE;
+}
