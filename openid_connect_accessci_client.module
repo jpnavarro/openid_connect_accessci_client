@@ -9,7 +9,7 @@ function openid_connect_accessci_client_openid_connect_userinfo_save(UserInterfa
     }
     $account->set('name', $context['userinfo']['sub']);
 
-    $redirect_to = \Drupal::config('openid_connect.settings.accessci')->get('login_redirect');
+    $redirect_to = \Drupal::config('openid_connect.settings.accessci')->get('login_redirection');
     if ( !empty($redirect_to) ) {
         $redirect = new RedirectResponse(Url::fromUserInput($redirect_to)->toString());
         $redirect->send();
@@ -28,7 +28,7 @@ function openid_connect_accessci_client_openid_connect_userinfo_save(UserInterfa
 function openid_connect_accessci_client_openid_connect_pre_authorize($account, array $context) {
     if ( empty($context['userinfo']['idp_name'])
         || $context['userinfo']['idp_name'] != 'ACCESS' ) {
-            Drupal::messenger()->addError(t('Login using your ACCESS CI identity is required on this website'));
+            Drupal::messenger()->addError(t('This website requires login using an ACCESS CI identity'));
             return FALSE;
     }
 

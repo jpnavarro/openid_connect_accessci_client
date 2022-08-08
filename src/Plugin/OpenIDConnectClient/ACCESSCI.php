@@ -41,12 +41,11 @@ class ACCESSCI extends OpenIDConnectClientBase {
        '#type' => 'textfield',
        '#default_value' => $this->configuration['requested_scopes'],
     ];
-    $form['login_redirect'] = [
-       '#title' => $this->t('Login redirect page'),
+    $form['login_redirection'] = [
+       '#title' => $this->t('Login redirection path'),
        '#type' => 'textfield',
-       '#default_value' => $this->configuration['login_redirect'],
+       '#default_value' => $this->configuration['login_redirection'],
     ];
-
 
     return $form;
   }
@@ -67,7 +66,7 @@ class ACCESSCI extends OpenIDConnectClientBase {
    */
   public function getClientScopes() {
     $scopes_string = $this->configuration['requested_scopes'];
-    $scopes_array = explode(',' $scopes_string);
+    $scopes_array = explode(',', $scopes_string);
     return $scopes_array;
   }
 
