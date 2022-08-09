@@ -1,6 +1,6 @@
 # Schema for the configuration files of the OpenID Connect module.
 
-openid_connect.settings.generic:
+openid_connect.settings.accessci:
   type: config_object
   label: 'OpenID Connect accessci settings'
   mapping:
