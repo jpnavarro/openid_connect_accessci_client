@@ -11,20 +11,14 @@ function openid_connect_accessci_client_openid_connect_userinfo_save(UserInterfa
     }
     $account->set('name', $context['userinfo']['sub']);
 
-    $redirect_to = \Drupal::config('openid_connect.settings.accessci')->get('login_redirection');
+    $settings = \Drupal::config('openid_connect.settings.accessci')->get('settings');
+    $redirect_to = $settings['login_redirection'];
     if ( !empty($redirect_to) ) {
         $redirect = new RedirectResponse(Url::fromUserInput($redirect_to)->toString());
         $redirect->send();
     }
 
     return TRUE;
-    /**
-    $idp = $context['userinfo']['idp_name'];
-    $sub = $context['userinfo']['sub'];
-    ddm('HELLO ACCESSCI');
-    ddm($account);
-    ddm($context);
-    */
 }
 
 function openid_connect_accessci_client_openid_connect_pre_authorize($account, array $context) {

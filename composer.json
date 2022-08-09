@@ -17,5 +17,5 @@
             "email": "navarro@anl.gov"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "beta"
 }
